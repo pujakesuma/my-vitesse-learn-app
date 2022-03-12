@@ -2,7 +2,7 @@ import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } fro
 import axios from 'axios'
 import showCodeMessage from '~/api/code'
 
-const BASE_PREFIX = '/api'
+const BASE_PREFIX = import.meta.env.VITE_API_BASEURL
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_PREFIX,
@@ -24,10 +24,8 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     if (response.status === 200)
-      return response
-
-    // eslint-disable-next-line no-console
-    console.debug('c', JSON.stringify(response.status))
+      // eslint-disable-next-line no-console
+      console.debug('response', response.data)
     return response
   },
   (error: AxiosError) => {
