@@ -5,8 +5,14 @@ const router = useRouter()
 const store = useClassStore()
 
 const idClass = parseInt(props.name)
+const isOpen = ref<boolean>(false)
+
 const isFetching = computed(() => store.isFetching)
 const detail = computed(() => store.getDetailClass)
+
+const handleDialog = () => {
+  isOpen.value = !isOpen.value
+}
 
 // mounted
 onMounted(() => {
@@ -15,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div h-full flex justify-center pt-4rem>
+  <div relative h-full flex justify-center pt-4rem>
     <div v-if="isFetching" class="flex flex-col sm:flex-col md:flex-row space-x-0 sm:space-x-0 md:space-x-4">
       <div class="placeholder mb-4 sm:mb-4 md:mb-0 w-18rem sm:w-18rem md:w-lg">
         <div rounded-xl h-6 bg-gray-400 mb-4 class="w-1/4" />
@@ -45,7 +51,18 @@ onMounted(() => {
         >
           Back
         </button>
+        <button
+          class="btn m-3 text-sm mt-8"
+          @click="handleDialog"
+        >
+          Daftar Sekarang
+        </button>
       </div>
     </div>
+    <Modal v-if="isOpen" width="md" :is-open="isOpen" :persistent="true" title="Register" @close="handleDialog">
+      <div class="p-4">
+        <Register />
+      </div>
+    </Modal>
   </div>
 </template>
