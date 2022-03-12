@@ -25,6 +25,9 @@ export const useClassStore = defineStore('classes', {
     getClasses(): Items[] {
       return this.classes
     },
+    getDetailClass(): Detail {
+      return this.detailClasses
+    },
     isFetching(): boolean {
       return this.loading
     },
@@ -43,12 +46,15 @@ export const useClassStore = defineStore('classes', {
         throw err
       }
     },
-    async getDetailClass(id: number) {
+    async fetchDetail(id: number) {
+      this.loading = true
       try {
         const res = await classApi.getDetailClass({ id })
         this.detailClasses = res.data
+        this.loading = false
       }
       catch (err) {
+        this.loading = false
         console.error(err)
         throw err
       }
