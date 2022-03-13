@@ -1,9 +1,7 @@
 <script setup lang="ts">
-const onSubmit = () => {
-  console.log(attendeeFullName)
-  console.log(attendeeEmail)
-}
-// const classId = $ref('')
+import { useClassStore } from '~/store/class'
+const store = useClassStore()
+
 const attendeeFullName = $ref<string>('')
 const attendeeEmail = $ref<string>('')
 
@@ -11,6 +9,9 @@ const attendeeEmail = $ref<string>('')
 const handleName = computed(() => attendeeFullName.length > 3)
 const handleEmail = computed(() => attendeeEmail.length > 3)
 
+const onSubmit = () => {
+  store.register(attendeeFullName, attendeeEmail)
+}
 </script>
 
 <template>
