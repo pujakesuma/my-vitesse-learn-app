@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useClassStore } from '~/store/class'
 import { isDark, toggleDark } from '~/composables'
+import Toast from '~/components/Toast.vue'
 const props = defineProps<{ name: string }>()
 const router = useRouter()
 const store = useClassStore()
@@ -76,7 +77,7 @@ onMounted(() => {
         </div>
 
         <div class="pt-12 pb-8">
-          <button class="btn text-white font-bold py-2 px-4 rounded-full">
+          <button class="btn text-white font-bold py-2 px-4 rounded-full" @click="handleDialog()">
             Daftar Sekarang
           </button>
         </div>
@@ -98,10 +99,11 @@ onMounted(() => {
         <div v-else i-carbon-sun />
       </button>
     </div>
-    <Modal v-if="isOpen" width="md" :is-open="isOpen" :persistent="true" title="Register" @close="handleDialog">
+    <Modal v-if="isOpen" width="md" :is-open="isOpen" :persistent="true" title="Daftar" @close="handleDialog">
       <div class="p-4">
         <Register />
       </div>
     </Modal>
+    <Toast />
   </div>
 </template>
