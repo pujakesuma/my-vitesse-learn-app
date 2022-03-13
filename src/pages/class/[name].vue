@@ -37,7 +37,7 @@ onMounted(() => {
     <div class="w-full lg:w-2/5 h-1/2 rounded-r-xl bg-cover bg-center hidden lg:block bg-gray-600" />
   </div>
 
-  <div v-else class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+  <div v-else class="max-w-4xl relative flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
     <!--Main Col-->
     <div class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl opacity-75 mx-6 lg:mx-0">
       <div class="p-4 md:p-12 text-center lg:text-left">
