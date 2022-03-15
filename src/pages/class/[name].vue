@@ -16,6 +16,8 @@ const handleDialog = () => {
   isOpen.value = !isOpen.value
 }
 
+const handleBack = () => router.push('/')
+
 // mounted
 onMounted(() => {
   store.fetchDetail(idClass)
@@ -25,7 +27,7 @@ onMounted(() => {
 <template>
   <div v-if="isFetching" class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
     <Card>
-      <div class="p-4 md:p-12 text-center lg:text-left">
+      <div class="p-4 md:p-12 text-center lg:text-left animate-pulse">
         <div class="block mb-4 lg:hidden rounded-full bg-gray-400 shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" />
         <div class="mb-4 sm:mb-4 md:mb-0 w-full">
           <div rounded-xl h-6 bg-gray-400 mb-4 class="w-1/4" />
@@ -37,7 +39,7 @@ onMounted(() => {
     <div class="w-full lg:w-2/5 h-1/2 rounded-r-xl bg-cover bg-center hidden lg:block bg-gray-600" />
   </div>
 
-  <div v-else class="max-w-4xl relative flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+  <div v-else relative class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
     <!--Main Col-->
     <div class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl opacity-75 mx-6 lg:mx-0">
       <div class="p-4 md:p-12 text-center lg:text-left">
@@ -87,23 +89,23 @@ onMounted(() => {
     <!--Img Col-->
     <div class="w-full lg:w-2/5 h-1/2 rounded-r-xl bg-cover bg-center hidden lg:block" style="background: url('https://source.unsplash.com/XJXWbfSo2f0')" />
 
-    <!-- Toggler. TODO : Pin to top right corner -->
-    <div class="absolute top-4 left-0 h-12 w-18 p-4">
-      <button class="icon-btn !outline-none" @click="router.back()">
-        <div i-carbon-arrow-left />
-      </button>
-    </div>
-    <div class="absolute top-4 right-0 h-12 w-18 p-4">
-      <button class="icon-btn !outline-none" @click="toggleDark()">
-        <div v-if="isDark" i-carbon-moon />
-        <div v-else i-carbon-sun />
-      </button>
-    </div>
     <Modal v-if="isOpen" width="md" :is-open="isOpen" :persistent="true" title="Daftar" @close="handleDialog">
       <div class="p-4">
         <Register />
       </div>
     </Modal>
     <Toast />
+  </div>
+  <!-- Toggler. TODO : Pin to top right corner -->
+  <div class="absolute top-4 left-0 h-12 w-18 p-4">
+    <button class="icon-btn !outline-none" @click="handleBack()">
+      <div i-carbon-arrow-left />
+    </button>
+  </div>
+  <div class="absolute top-4 right-0 h-12 w-18 p-4">
+    <button class="icon-btn !outline-none" @click="toggleDark()">
+      <div v-if="isDark" i-carbon-moon />
+      <div v-else i-carbon-sun />
+    </button>
   </div>
 </template>
